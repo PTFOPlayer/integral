@@ -2,7 +2,11 @@
 name = "integral_rs"
 version = "0.1.0"
 edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+license = "MIT OR Apache-2.0"
+authors = ["WhiskyAKM"]
+repository = "https://github.com/PTFOPlayer/integrl_rs"
+description = "Simple liblary for solving integrals using numerical methods"
+categories = ["math"]
+keywords = ["integral", "math", "numeric"]
 
 [dependencies]
