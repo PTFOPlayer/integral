@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "integral_rs"
+name = "integral_lib"
 version = "0.1.0"
