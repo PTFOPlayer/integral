@@ -1,4 +1,4 @@
-# integral_rs
+# integral_lib
 Simple liblary for solving integrals using numerical methods
 
 ## examples:
