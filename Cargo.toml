@@ -4,9 +4,13 @@ version = "0.1.0"
 edition = "2021"
 license = "MIT OR Apache-2.0"
 authors = ["WhiskyAKM"]
-repository = "https://github.com/PTFOPlayer/integrl_rs"
+repository = "https://github.com/PTFOPlayer/integral"
 description = "Simple liblary for solving integrals using numerical methods"
 categories = ["math"]
 keywords = ["integral", "math", "numeric"]
 
+[features]
+simd = ["packed_simd"]
+
 [dependencies]
+packed_simd = { version = "0.3.9", optional = true }

@@ -1,29 +1,20 @@
 use std::mem::swap;
 
-fn partation(a: f64, b: f64, steps: usize) -> Vec<f64> {
-    let mut v = vec![];
-    let step_by: f64 = (b - a) / steps as f64;
-    let mut x = a + step_by;
-    while x < b {
-        v.push(x);
-        x += step_by;
-    }
-
-    return v;
-}
+#[cfg(feature = "simd")]
+mod simd;
 
 pub fn trapezoidal(mut a: f64, mut b: f64, steps: usize, f: fn(f64) -> f64) -> f64 {
     if a > b {
         swap(&mut a, &mut b);
     }
 
-    let v = partation(a, b, steps);
-
     let h = (b - a) / steps as f64;
 
     let mut sum = (f(a) + f(b)) / 2f64;
-    for e in v {
-        sum += f(e);
+    let mut x = a + h;
+    while x < b {
+        sum += f(x);
+        x += h;
     }
 
     return h * sum;
@@ -36,23 +27,25 @@ pub fn simpsons_one_third(mut a: f64, mut b: f64, steps: usize, f: fn(f64) -> f6
         swap(&mut a, &mut b);
     }
 
-    let v = partation(a, b, steps);
-
-    let h = (b - a) / (stepsf64 * 3f64);
+    let h = (b - a) / (stepsf64);
 
     let mut sum = (f(a) + f(b)) / 2f64;
     let mut s_2 = 0f64;
     let mut s_4 = 0f64;
-    for i in 0..v.len() {
+    let mut x = a + h;
+    let mut i = 0;
+    while x < b {
         if (i + 1) % 2 == 1 {
-            s_4 += f(v[i]);
+            s_4 += f(x);
         } else {
-            s_2 += f(v[i]);
+            s_2 += f(x);
         }
+        x += h;
+        i += 1;
     }
     sum += (s_2 * 2f64) + (s_4 * 4f64);
 
-    return h * sum;
+    return (h * sum) / 3f64;
 }
 
 pub fn simpsons_three_eights(mut a: f64, mut b: f64, steps: usize, f: fn(f64) -> f64) -> f64 {
@@ -62,24 +55,25 @@ pub fn simpsons_three_eights(mut a: f64, mut b: f64, steps: usize, f: fn(f64) ->
         swap(&mut a, &mut b);
     }
 
-    let v = partation(a, b, steps);
+    let h = (b - a) / stepsf64;
 
-    let mut h = (b - a) / stepsf64;
-    h *= 3f64 / 8f64;
-
-    let mut sum = (f(a) + f(b)) / 2f64;
+    let mut sum = f(a) + f(b);
     let mut s_2 = 0f64;
     let mut s_3 = 0f64;
-    for i in 0..v.len() {
+    let mut x = a + h;
+    let mut i = 0;
+    while x < b {
         if (i + 1) % 3 == 0 {
-            s_2 += f(v[i]);
+            s_2 += f(x);
         } else {
-            s_3 += f(v[i]);
+            s_3 += f(x);
         }
+        x += h;
+        i += 1;
     }
     sum += (s_2 * 2f64) + (s_3 * 3f64);
 
-    return h * sum;
+    return h * sum * 3f64 / 8f64;
 }
 
 #[cfg(test)]
