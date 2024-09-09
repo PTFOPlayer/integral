@@ -7,7 +7,7 @@ authors = ["WhiskyAKM"]
 repository = "https://github.com/PTFOPlayer/integral"
 description = "Simple liblary for solving integrals using numerical methods"
 categories = ["math"]
-keywords = ["integral", "math", "numeric"]
+keywords = ["integral", "numeric"]
 
 [features]
 simd = []
