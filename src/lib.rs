@@ -1,7 +1,10 @@
+#![cfg_attr(feature="simd", feature(portable_simd))]
+
 use std::mem::swap;
 
 #[cfg(feature = "simd")]
 mod simd;
+
 
 pub fn trapezoidal(mut a: f64, mut b: f64, steps: usize, f: fn(f64) -> f64) -> f64 {
     if a > b {
