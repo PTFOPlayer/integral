@@ -6,7 +6,7 @@ license = "MIT OR Apache-2.0"
 authors = ["WhiskyAKM"]
 repository = "https://github.com/PTFOPlayer/integral"
 description = "Simple liblary for solving integrals using numerical methods"
-categories = ["Mathematics"]
+categories = []
 keywords = ["integral", "math", "numeric"]
 
 [features]
