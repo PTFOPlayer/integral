@@ -1,6 +1,6 @@
 [package]
 name = "integral_lib"
-version = "0.2.0"
+version = "0.2.1"
 edition = "2021"
 license = "MIT OR Apache-2.0"
 authors = ["WhiskyAKM"]
@@ -8,6 +8,7 @@ repository = "https://github.com/PTFOPlayer/integral"
 description = "Simple liblary for solving integrals using numerical methods"
 categories = []
 keywords = ["integral", "math", "numeric"]
+readme = "readme.md"
 
 [features]
 simd = []
